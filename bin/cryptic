@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'colorize'
+require 'cryptic'
+require 'thor'
+
+class CrypticCLI < Thor
+  desc 'decrypt [DATA] [PRIVATE_KEY] [OPTIONS]', 'Decrypt a file with a private key.'
+  def decrypt(data, private_key)
+    decryptable = Cryptic::EncryptedData.load(data)
+  rescue Cryptic::InvalidData => e
+    $stderr.puts "[Error]: #{e.message}".red
+  rescue Cryptic::KeyMismatch => e
+    $stderr.puts "[Error]: #{e.message}".red
+  end
+
+  desc 'encrypt', 'Encrypt a file with a public key.'
+  def encrypt(data, public_key)
+    encryptable = Cryptic::EncryptedData.new(data, public_key)
+  end
+
+  desc 'generate', 'Generate a private/public keypair', aliases: %w[gen key-gen]
+  method_option :path, desc: 'Where to place the generated files', aliases: %w[-p]
+  def generate
+    keypair = Cryptic::Keypair.new(options)
+    keypair.save!
+  rescue Cryptic::KeyGenerationFailure => e
+    $stderr.puts "[Error]: #{e.message}".red
+  end
+end
