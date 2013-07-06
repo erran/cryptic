@@ -31,7 +31,7 @@ class CrypticCLI < Thor
     $stdout.puts encrypted_str
   end
 
-  desc 'generate', 'Generate a private/public keypair', aliases: %w[gen key-gen]
+  desc 'generate [-o PATH]', 'Generate a private/public keypair', aliases: %w[gen key-gen]
   method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated files'
   def generate
     keypair = Cryptic::Keypair.new
