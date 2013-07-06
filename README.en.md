@@ -11,7 +11,7 @@ Just run: `gem install cryptic` or add `gem 'cryptic'` to your Gemfile.
 ### Command line
 
 ```
-[ecarey @ cryptic]$ cryptic 
+[ecarey @ cryptic]$ cryptic
 Commands:
   cryptic decrypt [PRIVATE_KEY] [ENCRYPTED_FILE] [OPTIONS]  # Decrypt a file with a private key
   cryptic encrypt [PUBLIC_KEY] [TEXT_FILE] [OPTIONS]        # Encrypt a file with a public key
