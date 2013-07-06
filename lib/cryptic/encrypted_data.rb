@@ -18,30 +18,29 @@ module Cryptic
     # @note If called without a public key's file name this doesn't
     #   automatically encrypt the data
     # @param [String] data the data to encrypt
-    # @param [String] public_key_file the filename of the public key to use in
+    # @param [String] public_key the  public key to use in # TODO: Update the indent right here
     #   the encryption process
     # @param [Symbol] encoding the encoding to use
+    # @todo Document the opts hash
+    # @todo Create an encrypt method to clean up this code
     # @raise [KeyNotFound] if the specified public key wasn't found on the
     #   file system
     # @return [EncryptedData] an encrypted data object
-    def initialize(data, public_key_file = nil, encoding = :none)
+    def initialize(data, public_key = nil, encoding = :none, opts = {})
       @encoding = encoding
 
-      if !public_key_file
+      if !public_key && !opts[:public_key_file]
         # If no public key was provided the data should already be encrypted
         @data = data
-      elsif File.exists?(public_key_file.to_s)
+      elsif File.exists?(opts[:public_key_file].to_s)
         public_key = OpenSSL::PKey::RSA.new(File.read(public_key_file))
         encrypted_data = public_key.public_encrypt(data)
         @data = encode(encrypted_data)
-      else
-        public_key = OpenSSL::PKey::RSA.new(public_key_file)
+      elsif public_key
+        public_key = OpenSSL::PKey::RSA.new(public_key)
         encrypted_data = public_key.public_encrypt(data)
         @data = encode(encrypted_data)
       end
-    rescue => e
-      $stderr.puts e
-      raise Cryptic::KeyNotFound
     end
 
     # Creates a new encrypted data object from an encrypted data string
@@ -62,6 +61,9 @@ module Cryptic
     # @param [String] passphrase the passphrase to unlock the private key with
     # @raise [KeyNotFound] if the specified public key wasn't found on the
     #   file system
+    # @todo Use the opts syntax like in initialize
+    # @todo Update the this method with encrypt in code cleanup
+    # @return [String] the unencrypted data
     def decrypt(private_key_file, passphrase = nil)
       if File.exists?(private_key_file.to_s)
         private_key = OpenSSL::PKey::RSA.new(File.read(private_key_file), passphrase)
@@ -80,7 +82,7 @@ module Cryptic
     # @return [String] the encrypted data string
     def to_s; @data; end
 
-    private
+    private # TODO: Determine whether to use private here or not
 
     # TODO: The decode/encode methods shouldn't share so much code
     # TODO: These methods also shouldn't raise an exception that could be raised
