@@ -1,5 +1,6 @@
 require 'cryptic/encrypted_data'
 require 'cryptic/exceptions'
+require 'cryptic/keypair'
 require 'cryptic/version'
 
 # A module to encrypt data using public keys
