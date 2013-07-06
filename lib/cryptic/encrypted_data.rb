@@ -30,13 +30,18 @@ module Cryptic
       if !public_key_file
         # If no public key was provided the data should already be encrypted
         @data = data
-      elsif File.exists? public_key_file.to_s
+      elsif File.exists?(public_key_file.to_s)
         public_key = OpenSSL::PKey::RSA.new(File.read(public_key_file))
         encrypted_data = public_key.public_encrypt(data)
         @data = encode(encrypted_data)
       else
-        raise Cryptic::KeyNotFound
+        public_key = OpenSSL::PKey::RSA.new(public_key_file)
+        encrypted_data = public_key.public_encrypt(data)
+        @data = encode(encrypted_data)
       end
+    rescue => e
+      $stderr.puts e
+      raise Cryptic::KeyNotFound
     end
 
     # Creates a new encrypted data object from an encrypted data string
@@ -58,13 +63,18 @@ module Cryptic
     # @raise [KeyNotFound] if the specified public key wasn't found on the
     #   file system
     def decrypt(private_key_file, passphrase = nil)
-      if File.exists? private_key_file.to_s
+      if File.exists?(private_key_file.to_s)
         private_key = OpenSSL::PKey::RSA.new(File.read(private_key_file), passphrase)
         decoded_string = decode(@data)
         private_key.private_decrypt(decoded_string)
       else
-        raise Cryptic::KeyNotFound
+        private_key = OpenSSL::PKey::RSA.new(private_key_file, passphrase)
+        decoded_string = decode(@data)
+        private_key.private_decrypt(decoded_string)
       end
+    rescue => e
+      $stderr.puts e
+      raise Cryptic::KeyNotFound
     end
 
     # @return [String] the encrypted data string
