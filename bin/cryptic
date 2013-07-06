@@ -3,6 +3,7 @@
 # vi: set ft=ruby :
 
 require 'cryptic'
+require 'cryptic/keypair'
 require 'thor'
 
 class CrypticCLI < Thor
@@ -33,8 +34,10 @@ class CrypticCLI < Thor
   desc 'generate', 'Generate a private/public keypair', aliases: %w[gen key-gen]
   method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated files'
   def generate
-    keypair = Cryptic::Keypair.new(options)
-    keypair.save!
+    keypair = Cryptic::Keypair.new
+    keypair.save!(options[:path])
+
+    $stdout.puts "Generated keys saved as '#{File.expand_path(options[:path])}/cryptic_public.pem' and '#{File.expand_path(options[:path])}/cryptic_private.pem'."
   rescue Cryptic::KeyGenerationFailure => e
     $stderr.puts "[Error]: #{e.message}".red
   end
