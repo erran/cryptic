@@ -7,36 +7,46 @@ require 'cryptic/keypair'
 require 'thor'
 
 class CrypticCLI < Thor
-  desc 'decrypt [ENCRYPTED_DATA] [PRIVATE_KEY] [OPTIONS]', 'Decrypt a file with a private key.'
+  desc 'decrypt [PRIVATE_KEY] [ENCRYPTED_FILE] [OPTIONS]', 'Decrypt a file with a private key.'
   method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to unlock the private key with'
   method_option :encoding, aliases: %w[-e], default: :none, desc: 'The encoding to use, one of: [:none, :base64]'
-  def decrypt(data, private_key)
+  method_option :path, aliases: %w[-o], default: "cryptic_#{rand(1000..9999)}.txt", desc: 'Where to place the encrypted file'
+  def decrypt(private_key, file)
+    # TODO: Update error handling
+    #   * Better utilize custom exceptions
+    #   * Catch file read errors
+    data = File.read(file)
     encrypted = Cryptic::EncryptedData.load(data, options[:encoding])
-    decrypted_str = encrypted.decrypt(private_key_file, options[:passphrase])
 
-    $stdout.puts decrypted_str
-  # TODO: Update error handling
+    File.open(options[:path], 'w') do |file|
+      file.write encrypted.decrypt(private_key, options[:passphrase])
+    end
   rescue Cryptic::InvalidData => e
     $stderr.puts "[Error]: #{e.inspect}".red
   rescue Cryptic::KeyMismatch => e
     $stderr.puts "[Error]: #{e.inspect}".red
   end
 
-  desc 'encrypt [RAW_DATA] [PUBLIC_KEY]', 'Encrypt a file with a public key.'
+  desc 'encrypt [PUBLIC_KEY] [TEXT_FILE] [OPTIONS]', 'Encrypt a file with a public key.'
   method_option :encoding, aliases: %w[-e], default: :none, desc: 'The encoding to use, one of: [:none, :base64]'
-  def encrypt(data, public_key)
+  method_option :path, aliases: %w[-o], default: "cryptic_#{rand(1000..9999)}.ctxt", desc: 'Where to place the encrypted file'
+  def encrypt(public_key, file)
+    # TODO: Update error handling; See above TODO.
+    data = File.read(file)
     encrypted = Cryptic::EncryptedData.new(data, public_key)
-    encrypted_str = encrypted.data
 
-    $stdout.puts encrypted_str
+    File.open(options[:path], 'w') do |file|
+      file.write encrypted.data
+    end
   end
 
-  desc 'generate [-o PATH]', 'Generate a private/public keypair', aliases: %w[gen key-gen]
-  method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated files'
+  desc 'generate [OPTIONS]', 'Generate a private/public keypair', aliases: %w[gen key-gen]
+  method_option :bits, aliases: %w[-b size], default: 2048, desc: 'The number of bits to use when generating your key'
+  method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to generate the private key with'
+  method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated keys'
   def generate
-    keypair = Cryptic::Keypair.new
-    keypair.save!(options[:path])
-
+    keypair = Cryptic::Keypair.new(options[:passphrase], options[:bits])
+    keypair.save(options[:path])
     $stdout.puts "Generated keys saved as '#{File.expand_path(options[:path])}/cryptic_public.pem' and '#{File.expand_path(options[:path])}/cryptic_private.pem'."
   rescue Cryptic::KeyGenerationFailure => e
     $stderr.puts "[Error]: #{e.message}".red
