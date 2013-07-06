@@ -17,7 +17,7 @@ class CrypticCLI < Thor
     #   * Catch file read errors
     data = File.read(file)
     encrypted = Cryptic::EncryptedData.load(data, options[:encoding])
-    decrypted_str = encrypted.decrypt(private_key, options[:passphrase]).to_s
+    decrypted_str = encrypted.decrypt(private_key, options[:passphrase])
 
     if decrypted_str.eql?('')
       $stderr.puts '[Error]: Unable to save the decrypted file'
@@ -42,7 +42,7 @@ class CrypticCLI < Thor
     # TODO: Update error handling; See above TODO.
     data = File.read(file)
     encrypted = Cryptic::EncryptedData.new(data, public_key)
-    encrypted_str = encrypted.data.to_s
+    encrypted_str = encrypted.data
 
     if encrypted_str.eql?('')
       $stderr.puts '[Error]: Unable to save the encrypted file'
