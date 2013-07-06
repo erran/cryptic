@@ -2,12 +2,13 @@
 A Ruby gem for public key encryption, private key decryption, and generating key pairs.
 
 ## Installation
-`gem install cryptic`
+Just run: `gem install cryptic` or add `gem 'cryptic'` to your Gemfile.
 
 ## Usage
 ### Command line
 
 ```
+[ecarey @ cryptic]$ cryptic 
 Commands:
   cryptic decrypt [PRIVATE_KEY] [ENCRYPTED_FILE] [OPTIONS]  # Decrypt a file with a private key
   cryptic encrypt [PUBLIC_KEY] [TEXT_FILE] [OPTIONS]        # Encrypt a file with a public key
