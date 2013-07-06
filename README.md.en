@@ -33,7 +33,7 @@ public_key = keypair.public_key
 
 # Encrypt a file:
 data = File.read('foo.txt')
-encrypted = Cryptic::EncryptedData.new(data, public_key)
+encrypted = Cryptic::EncryptedData.new(data, public_key, :base64)
 
 # Returns an encrypted string you can save off to a file
 encrypted.data
