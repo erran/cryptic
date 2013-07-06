@@ -1,4 +1,4 @@
-# Cryptic
+# Cryptic [![Build Status](https://secure.travis-ci.org/ipwnstuff/cryptic.png)](http://travis-ci.org/ipwnstuff/cryptic) [![Dependency Status](https://gemnasium.com/ipwnstuff/cryptic.png)](https://gemnasium.com/ipwnstuff/cryptic)
 A Ruby gem for public key encryption, private key decryption, and generating key pairs.
 
 ## Documentation
@@ -22,6 +22,8 @@ Commands:
 ### Ruby
 
 ```ruby
+require 'cryptic'
+
 # Generate a keypair to use with a passphrase and the number of bits you'd like:
 keypair = Cryptic::Keypair.new('P4$SpHr4z3', 2048)
 keypair.save("#{ENV['HOME']}/.cryptic_keys")
