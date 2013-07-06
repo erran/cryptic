@@ -8,8 +8,6 @@ module Cryptic
 
   # A class with methods to encrypt/decrypt data
   #
-  # @!attribute [Symbol] encoding the encoding to use
-  # @!attribute [String] data the encrypted data string
   # @author Erran Carey <me@errancarey.com>
   class EncryptedData
     attr_reader :data
