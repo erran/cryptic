@@ -12,6 +12,8 @@ module Cryptic
   # @!attribute [String] public_key the contents of the public key file
   # @author Erran Carey <me@errancarey.com>
   class Keypair
+    attr_reader :private_key
+    attr_reader :public_key
     # Creates a keypair to be saved with #save
     #
     # @param [Fixnum] size the amount of bits to use in your key
