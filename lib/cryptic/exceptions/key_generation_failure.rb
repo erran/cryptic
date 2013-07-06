@@ -3,6 +3,6 @@ module Cryptic
     # An generic exception that gets raised when key generation fails
     #
     # @author Erran Carey <me@errancarey.com>
-    class KeyGenerationFailure < StandardError; end
+    class KeyGenerationFailure < RuntimeError; end
   end
 end

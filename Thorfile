@@ -1,11 +1,14 @@
 # encoding: utf-8
+$:.unshift File.expand_path("../lib", __FILE__)
 
 require 'bundler'
 require 'bundler/setup'
 require 'thor/rake_compat'
+require 'yard'
 
 class Default < Thor
   include Thor::RakeCompat
+  require 'bundler/gem_tasks'
 
   desc 'install', "Build and install cryptic-#{Cryptic::VERSION}.gem into system gems"
   def install

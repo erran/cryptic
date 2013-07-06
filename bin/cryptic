@@ -7,22 +7,32 @@ require 'cryptic'
 require 'thor'
 
 class CrypticCLI < Thor
-  desc 'decrypt [DATA] [PRIVATE_KEY] [OPTIONS]', 'Decrypt a file with a private key.'
+  desc 'decrypt [ENCRYPTED_DATA] [PRIVATE_KEY] [OPTIONS]', 'Decrypt a file with a private key.'
+  method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to unlock the private key with'
+  method_option :encoding, aliases: %w[-e], default: :none, desc: 'The encoding to use, one of: [:none, :base64]'
   def decrypt(data, private_key)
-    decryptable = Cryptic::EncryptedData.load(data)
+    encrypted = Cryptic::EncryptedData.load(data, options[:encoding])
+    decrypted_str = encrypted.decrypt(private_key_file, options[:passphrase])
+
+    $stdout.puts decrypted_str
+  # TODO: Update error handling
   rescue Cryptic::InvalidData => e
-    $stderr.puts "[Error]: #{e.message}".red
+    $stderr.puts "[Error]: #{e.inspect}".red
   rescue Cryptic::KeyMismatch => e
-    $stderr.puts "[Error]: #{e.message}".red
+    $stderr.puts "[Error]: #{e.inspect}".red
   end
 
-  desc 'encrypt', 'Encrypt a file with a public key.'
+  desc 'encrypt [RAW_DATA] [PUBLIC_KEY]', 'Encrypt a file with a public key.'
+  method_option :encoding, aliases: %w[-e], default: :none, desc: 'The encoding to use, one of: [:none, :base64]'
   def encrypt(data, public_key)
-    encryptable = Cryptic::EncryptedData.new(data, public_key)
+    encrypted = Cryptic::EncryptedData.new(data, public_key)
+    encrypted_str = encrypted.data
+
+    $stdout.puts encrypted_str
   end
 
   desc 'generate', 'Generate a private/public keypair', aliases: %w[gen key-gen]
-  method_option :path, desc: 'Where to place the generated files', aliases: %w[-p]
+  method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated files'
   def generate
     keypair = Cryptic::Keypair.new(options)
     keypair.save!
@@ -30,3 +40,5 @@ class CrypticCLI < Thor
     $stderr.puts "[Error]: #{e.message}".red
   end
 end
+
+CrypticCLI.start(ARGV)

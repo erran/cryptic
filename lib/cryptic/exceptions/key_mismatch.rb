@@ -1,3 +1,5 @@
+require 'cryptic/exceptions/decryption_error'
+
 module Cryptic
   module Exceptions
     # An exception to raise when you try to decrypt with the wrong private key

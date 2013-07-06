@@ -6,7 +6,7 @@ require 'cryptic/version'
 #
 # @author Erran Carey <me@errancarey.com>
 module Cryptic
-  # This allows you to call methods by a shorthand name such as
+  # Including Cryptic::Exceptions allows you to use shorthand for exceptions:
   # Cryptic::DecryptionError instead of Cryptic::Exceptions::DecryptionError
   include Cryptic::Exceptions
 end
