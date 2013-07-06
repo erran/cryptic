@@ -37,7 +37,7 @@ module Cryptic
         encrypted_data = public_key.public_encrypt(data)
         @data = encode(encrypted_data)
       else
-        raise KeyNotFound
+        raise Cryptic::KeyNotFound
       end
     end
 
@@ -65,7 +65,7 @@ module Cryptic
         decoded_string = decode(@data)
         private_key.private_decrypt(decoded_string)
       else
-        raise KeyNotFound
+        raise Cryptic::KeyNotFound
       end
     end
 
