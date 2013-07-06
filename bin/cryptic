@@ -17,14 +17,22 @@ class CrypticCLI < Thor
     #   * Catch file read errors
     data = File.read(file)
     encrypted = Cryptic::EncryptedData.load(data, options[:encoding])
+    decrypted_str = encrypted.decrypt(private_key, options[:passphrase]).to_s
 
-    File.open(options[:path], 'w') do |file|
-      file.write encrypted.decrypt(private_key, options[:passphrase])
+    if decrypted_str.eql?('')
+      $stderr.puts '[Error]: Unable to save the decrypted file'
+      exit 1
+    else
+      File.open(options[:path], 'w') do |file|
+        file.write decrypted_str
+      end
     end
   rescue Cryptic::InvalidData => e
     $stderr.puts "[Error]: #{e.inspect}".red
+    exit 1
   rescue Cryptic::KeyMismatch => e
     $stderr.puts "[Error]: #{e.inspect}".red
+    exit 1
   end
 
   desc 'encrypt [PUBLIC_KEY] [TEXT_FILE] [OPTIONS]', 'Encrypt a file with a public key.'
@@ -34,9 +42,15 @@ class CrypticCLI < Thor
     # TODO: Update error handling; See above TODO.
     data = File.read(file)
     encrypted = Cryptic::EncryptedData.new(data, public_key)
+    encrypted_str = encrypted.data.to_s
 
-    File.open(options[:path], 'w') do |file|
-      file.write encrypted.data
+    if encrypted_str.eql?('')
+      $stderr.puts '[Error]: Unable to save the encrypted file'
+      exit 1
+    else
+      File.open(options[:path], 'w') do |file|
+        file.write encrypted_str
+      end
     end
   end
 
@@ -50,6 +64,7 @@ class CrypticCLI < Thor
     $stdout.puts "Generated keys saved as '#{File.expand_path(options[:path])}/cryptic_public.pem' and '#{File.expand_path(options[:path])}/cryptic_private.pem'."
   rescue Cryptic::KeyGenerationFailure => e
     $stderr.puts "[Error]: #{e.message}".red
+    exit 1
   end
 end
 
