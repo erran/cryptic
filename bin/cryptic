@@ -3,7 +3,6 @@
 # vi: set ft=ruby :
 
 require 'cryptic'
-require 'cryptic/keypair'
 require 'thor'
 
 class CrypticCLI < Thor
