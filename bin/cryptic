@@ -7,7 +7,7 @@ require 'cryptic/keypair'
 require 'thor'
 
 class CrypticCLI < Thor
-  desc 'decrypt [PRIVATE_KEY] [ENCRYPTED_FILE] [OPTIONS]', 'Decrypt a file with a private key.'
+  desc 'decrypt [PRIVATE_KEY] [ENCRYPTED_FILE] [OPTIONS]', 'Decrypt a file with a private key'
   method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to unlock the private key with'
   method_option :encoding, aliases: %w[-e], default: :none, desc: 'The encoding to use, one of: [:none, :base64]'
   method_option :path, aliases: %w[-o], default: "cryptic_#{rand(1000..9999)}.txt", desc: 'Where to place the encrypted file'
@@ -35,7 +35,7 @@ class CrypticCLI < Thor
     exit 1
   end
 
-  desc 'encrypt [PUBLIC_KEY] [TEXT_FILE] [OPTIONS]', 'Encrypt a file with a public key.'
+  desc 'encrypt [PUBLIC_KEY] [TEXT_FILE] [OPTIONS]', 'Encrypt a file with a public key'
   method_option :encoding, aliases: %w[-e], default: :none, desc: 'The encoding to use, one of: [:none, :base64]'
   method_option :path, aliases: %w[-o], default: "cryptic_#{rand(1000..9999)}.ctxt", desc: 'Where to place the encrypted file'
   def encrypt(public_key, file)
@@ -61,7 +61,7 @@ class CrypticCLI < Thor
   def generate
     keypair = Cryptic::Keypair.new(options[:passphrase], options[:bits])
     keypair.save(options[:path])
-    $stdout.puts "Generated keys saved as '#{File.expand_path(options[:path])}/cryptic_public.pem' and '#{File.expand_path(options[:path])}/cryptic_private.pem'."
+    $stdout.puts "Generated keys saved as '#{File.expand_path(options[:path])}/cryptic_public.pem' and '#{File.expand_path(options[:path])}/cryptic_private.pem'"
   rescue Cryptic::KeyGenerationFailure => e
     $stderr.puts "[Error]: #{e.message}".red
     exit 1
