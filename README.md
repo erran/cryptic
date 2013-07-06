@@ -1,6 +1,9 @@
 # Cryptic
 A Ruby gem for public key encryption, private key decryption, and generating key pairs.
 
+## Documentation
+http://www.rubydoc.info/github/ipwnstuff/cryptic
+
 ## Installation
 Just run: `gem install cryptic` or add `gem 'cryptic'` to your Gemfile.
 
