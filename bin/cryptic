@@ -2,7 +2,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require 'colorize'
 require 'cryptic'
 require 'thor'
 

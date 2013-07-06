@@ -1,3 +1,4 @@
+require 'colorize'
 require 'cryptic/exceptions/decryption_error'
 require 'cryptic/exceptions/encryption_error'
 require 'cryptic/exceptions/invalid_data'
