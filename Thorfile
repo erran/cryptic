@@ -10,6 +10,11 @@ class Default < Thor
   include Thor::RakeCompat
   require 'bundler/gem_tasks'
 
+  desc 'build', "Build cryptic-#{Cryptic::VERSION}.gem"
+  def build
+    Rake::Task['build'].execute
+  end
+
   desc 'install', "Build and install cryptic-#{Cryptic::VERSION}.gem into system gems"
   def install
     Rake::Task['install'].execute
