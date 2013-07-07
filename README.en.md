@@ -24,9 +24,8 @@ Commands:
 ```ruby
 require 'cryptic'
 
-# Generate a keypair to use with a passphrase and the number of bits you'd like:
-keypair = Cryptic::Keypair.new('P4$SpHr4z3', 2048)
-keypair.save("#{ENV['HOME']}/.cryptic_keys")
+# Load a keypair to use:
+keypair = Cryptic::Keypair.new('cryptic_private.pem', public_key: 'cryptic_public.pem')
 
 private_key = keypair.private_key
 public_key = keypair.public_key
