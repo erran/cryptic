@@ -1,21 +1,23 @@
 # Cryptic [![Estado de Creación](https://secure.travis-ci.org/ipwnstuff/cryptic.png)](http://travis-ci.org/ipwnstuff/cryptic) [![Estado de Dependencia](https://gemnasium.com/ipwnstuff/cryptic.png)](https://gemnasium.com/ipwnstuff/cryptic)
-## Documentacion
+Una Ruby gem para cifrar datos con su clave pública, descifrarlos con su clave privada, y generar nuevas claves.
+
+## Documentación
 En Español: # TODO: Añade un enlace al versión española del documentación
 En Inglès: http://www.rubydoc.info/github/ipwnstuff/cryptic
 
-## Installation
+## Instalación
 Sólo corra `gem install cryptic` o añada `gem 'cryptic'` a su `Gemfile`.
 También se puede descargar desde el código fuente.
 
-## Usage
-### Command line
+## Uso
+### Línea de Comandos
 
 ```
 [ecarey @ cryptic]$ cryptic
 Commands:
   cryptic decrypt [CLAVE_PRIVADA] [FICHERO_CIFRADO] [OPCIONES]  # Descifre una fichero con una clave privada
   cryptic encrypt [CLAVE_PUBLICO] [FICHERO_TEXTO] [OPTIONS]     # Cifre una fichero con una clave pública
-  cryptic generate [OPTIONS]                                    # Genere un nuevas claves
+  cryptic generate [OPTIONS]                                    # Genere nuevas claves
   cryptic help [COMMAND]                                        # Describe available commands or one specific command
 ```
 
@@ -42,6 +44,6 @@ descifrado = cifrado.decrypt(clave_privada, 'P4$SpHr4z3', :base64)
 
 1. Bifurcalo
 2. Cree un rama de la característica en Inglés (`git checkout -b feature/my-awesome-feature`)
-3. Comfirma sus cambios (`git commit -am 'Add some feature'`)
+3. Comfirme su cambios (`git commit -am 'Add some feature'`)
 4. Empuje to the branch (`git push origin feature/my-awesome-feature`)
 5. Cree una nuevo Pull Request
