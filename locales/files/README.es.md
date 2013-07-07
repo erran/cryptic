@@ -2,7 +2,7 @@
 Una Ruby gem para cifrar datos con su clave pública, descifrarlos con su clave privada, y generar nuevas claves.
 
 ## Documentación
-En Español: # TODO: Añade un enlace al versión española del documentación
+En Español: # TODO: Un enlace al versión española del documentación
 
 En Inglès: http://www.rubydoc.info/github/ipwnstuff/cryptic
 
@@ -16,9 +16,9 @@ También se puede descargar desde el código fuente.
 ```
 [ecarey @ cryptic]$ cryptic
 Commands:
-  cryptic decrypt [CLAVE_PRIVADA] [FICHERO_CIFRADO] [OPCIONES]  # Descifre una fichero con una clave privada
-  cryptic encrypt [CLAVE_PUBLICO] [FICHERO_TEXTO] [OPTIONS]     # Cifre una fichero con una clave pública
-  cryptic generate [OPTIONS]                                    # Genere nuevas claves
+  cryptic decrypt [CLAVE_PRIVADA] [FICHERO_CIFRADO] [OPCIONES]  # Descifrar una fichero con una clave privada
+  cryptic encrypt [CLAVE_PUBLICO] [FICHERO_TEXTO] [OPTIONS]     # Cifrar una fichero con una clave pública
+  cryptic generate [OPTIONS]                                    # Generar nuevas claves
   cryptic help [COMMAND]                                        # Describe available commands or one specific command
 ```
 
@@ -43,8 +43,8 @@ descifrado = cifrado.decrypt(clave_privada, 'P4$SpHr4z3', :base64)
 ```
 
 ## Contribuyendo
-1. Bifurcalo
-2. Cree un rama de la característica en Inglés (`git checkout -b feature/my-awesome-feature`)
-3. Comfirme su cambios con un mensaje Inglés (`git commit -am 'Add some feature'`)
-4. Empuje a su rama (`git push origin feature/my-awesome-feature`)
-5. Cree una nuevo Pull Request
+1. Bifurcarlo
+2. Crear un rama de la característica en Inglés (`git checkout -b feature/my-awesome-feature`)
+3. Comfirmar su cambios con un mensaje Inglés (`git commit -am 'Add some feature'`)
+4. Empujar a su rama (`git push origin feature/my-awesome-feature`)
+5. Crear un nuevo Pull Request
