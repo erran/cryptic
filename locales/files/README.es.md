@@ -40,10 +40,10 @@ cifrado.data
 
 descifrado = cifrado.decrypt(clave_privada, 'P4$SpHr4z3', :base64)
 ```
-## Contribuyendo
 
+## Contribuyendo
 1. Bifurcalo
 2. Cree un rama de la característica en Inglés (`git checkout -b feature/my-awesome-feature`)
-3. Comfirme su cambios (`git commit -am 'Add some feature'`)
-4. Empuje to the branch (`git push origin feature/my-awesome-feature`)
+3. Comfirme su cambios con un mensaje Inglés (`git commit -am 'Add some feature'`)
+4. Empuje a su rama (`git push origin feature/my-awesome-feature`)
 5. Cree una nuevo Pull Request
