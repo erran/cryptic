@@ -3,6 +3,7 @@ Una Ruby gem para cifrar datos con su clave pública, descifrarlos con su clave 
 
 ## Documentación
 En Español: # TODO: Añade un enlace al versión española del documentación
+
 En Inglès: http://www.rubydoc.info/github/ipwnstuff/cryptic
 
 ## Instalación
