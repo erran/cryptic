@@ -5,6 +5,10 @@
 require 'cryptic'
 require 'thor'
 
+# TODO: Add support for localized descriptions
+# TODO: Add support for localized alias of commands in locales that share the
+# English alphabet?
+
 class CrypticCLI < Thor
   desc 'decrypt [PRIVATE_KEY] [ENCRYPTED_FILE] [OPTIONS]', 'Decrypt a file with a private key'
   method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to unlock the private key with'
@@ -53,7 +57,7 @@ class CrypticCLI < Thor
     end
   end
 
-  desc 'generate [OPTIONS]', 'Generate a private/public keypair', aliases: %w[gen key-gen]
+  desc 'generate [OPTIONS]', 'Generate a private/public keypair'
   method_option :bits, aliases: %w[-b size], default: 2048, desc: 'The number of bits to use when generating your key'
   method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to generate the private key with'
   method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated keys'
