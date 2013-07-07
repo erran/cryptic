@@ -27,6 +27,7 @@ require 'cryptic'
 # Load a keypair to use:
 keypair = Cryptic::Keypair.new('cryptic_private.pem', public_key: 'cryptic_public.pem')
 
+# Obtain your public/private keys from the `Cryptic::Keypair` object:
 private_key = keypair.private_key
 public_key = keypair.public_key
 
@@ -34,10 +35,10 @@ public_key = keypair.public_key
 data = File.read('foo.txt')
 encrypted = Cryptic::EncryptedData.new(data, public_key, :base64)
 
-# Returns an encrypted string you can save off to a file
+# Returns an encrypted string you can save off to a file:
 encrypted.data
 
-# To return the data call decrypt on the encrypted data object w/ the private key and passphrase
+# To return the data call decrypt on the encrypted data object w/ the private key and passphrase:
 decrypted = encrypted.decrypt(private_key, 'P4$SpHr4z3', :base64)
 ```
 ## Contributing
