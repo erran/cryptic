@@ -30,15 +30,18 @@ require 'cryptic'
 # Para cargar las claves existantes:
 claves = Cryptic::Keypair.new('cryptic_private.pem', public_key: 'cryptic_public.pem')
 
-# Usar las métodos `private_key` y `private_key` para obtener las claves desde el objeto `Cryptic::Keypair`
+# Obtener las claves desde el objeto `Cryptic::Keypair`
 clave_privada = claves.private_key
 clave_publica = claves.public_key
 
+# Cifrar un fichero:
 datos = File.read('foo.txt')
 cifrado = Cryptic::EncryptedData.new(datos, clave_publica, :base64)
 
+# Retornar los datos cifrados:
 cifrado.data
 
+# Descifrarlos con su clave privada y su contraseña:
 descifrado = cifrado.decrypt(clave_privada, 'P4$SpHr4z3', :base64)
 ```
 
