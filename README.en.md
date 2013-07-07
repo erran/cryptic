@@ -38,7 +38,7 @@ encrypted = Cryptic::EncryptedData.new(data, public_key, :base64)
 encrypted.data
 
 # To return the data call decrypt on the encrypted data object w/ the private key and passphrase
-decrypted = encrypted.decrypt(private_key, 'P4$SpHr4z3')
+decrypted = encrypted.decrypt(private_key, 'P4$SpHr4z3', :base64)
 ```
 ## Contributing
 
