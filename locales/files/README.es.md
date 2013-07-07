@@ -30,7 +30,7 @@ require 'cryptic'
 # Para cargar las claves existantes:
 claves = Cryptic::Keypair.new('cryptic_private.pem', public_key: 'cryptic_public.pem')
 
-# Obtener las claves desde el objeto `Cryptic::Keypair`
+# Obtener las claves desde el objeto `Cryptic::Keypair`:
 clave_privada = claves.private_key
 clave_publica = claves.public_key
 
