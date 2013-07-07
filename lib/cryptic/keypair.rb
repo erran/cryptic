@@ -17,8 +17,8 @@ module Cryptic
     # @todo Validate that keys are public/private
     # @param [String] private_key the private key (or file) to use
     # @param [Hash] opts additional options to configure your Keypair with
-    # @option [String] public_key the public key (or file) to use
-    # @option [String] passphrase the passphrase to determine the public key
+    # @option opts [String] public_key the public key (or file) to use
+    # @option opts [String] passphrase the passphrase to determine the public key
     #   from
     # @return [Keypair] the initialized Cryptic::Keypair object
     def initialize(private_key, opts = { public_key: nil, passphrase: nil })

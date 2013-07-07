@@ -46,6 +46,7 @@ module Cryptic
     # Creates a new encrypted data object from an encrypted data string
     #
     # @param [String] data the encrypted data to load
+    # @param [Symbol] encoding the encoding to use
     # @return [EncryptedData] an encrypted data object
     def self.load(data, encoding = :none)
       new(data, nil, encoding)
