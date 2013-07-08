@@ -10,6 +10,9 @@ module Cryptic
   #
   # @author Erran Carey <me@errancarey.com>
   class Keypair
+    attr_accessor :private_key
+    attr_accessor :public_key
+
     # Initializes a Cryptic::Keypair object from a private/public keypair
     #
     # @note The passphrase isn't saved
