@@ -62,7 +62,7 @@ class CrypticCLI < Thor
   method_option :passphrase, aliases: %w[-p], default: nil, desc: 'The passphrase to generate the private key with'
   method_option :path, aliases: %w[-o], default: '.', desc: 'Where to place the generated keys'
   def generate
-    keypair = Cryptic::Keypair.new(options[:passphrase], options[:bits])
+    keypair = Cryptic::Keypair.generate(options[:passphrase], options[:bits])
     keypair.save(options[:path])
     $stdout.puts "Generated keys saved as '#{File.expand_path(options[:path])}/cryptic_public.pem' and '#{File.expand_path(options[:path])}/cryptic_private.pem'"
   rescue Cryptic::KeyGenerationFailure => e
