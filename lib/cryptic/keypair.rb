@@ -53,8 +53,6 @@ module Cryptic
                         elsif opts[:public_key]
                           opts[:public_key]
                         else
-                          require 'pry'
-                          binding.pry
                           @private_key or raise(Cryptic::KeyNotFound)
                         end,
                         opts[:passphrase]
