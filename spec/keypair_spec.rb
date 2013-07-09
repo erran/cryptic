@@ -1,5 +1,6 @@
 require 'cryptic/keypair'
 
+# TODO: Update tests to work
 describe Cryptic::Keypair do
   let :private_keys do
     keys = [
