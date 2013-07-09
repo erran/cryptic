@@ -1,6 +1,10 @@
 # Cryptic [![Build Status](https://secure.travis-ci.org/ipwnstuff/cryptic.png)](http://travis-ci.org/ipwnstuff/cryptic) [![Dependency Status](https://gemnasium.com/ipwnstuff/cryptic.png)](https://gemnasium.com/ipwnstuff/cryptic)
 A Ruby gem for public key encryption, private key decryption, and generating key pairs.
 
+## Languages
+For documentation in other languages look around in [locales/files](locales/files) to find a README marked with your laungage code.
+If you can speak multiple languages then feel free add a new one!
+
 ## Documentation
 http://www.rubydoc.info/github/ipwnstuff/cryptic
 
