@@ -82,7 +82,7 @@ module Cryptic
       rsa_key = OpenSSL::PKey::RSA.new(size)
       cipher ||= OpenSSL::Cipher::AES256.new(:CBC)
 
-      new(rsa_key.to_pem(cipher, passphrase), rsa_key.public_key.to_pem)
+      new(rsa_key.to_pem(cipher, passphrase), { public_key: rsa_key.public_key.to_pem, passphrase: passphrase })
     rescue OpenSSL::PKey::RSAError => e
       if e.message =~ /^read key$/
         retry unless attempts > 1
