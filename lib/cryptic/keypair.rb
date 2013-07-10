@@ -29,8 +29,8 @@ module Cryptic
         @private_key = private_key
       elsif !private_key.to_s.eql?('')
         @private_key = OpenSSL::PKey::RSA.new(
-                         if File.exists?(private_key)
-                           File.read(private_key)
+                         if File.exists?(File.expand_path(private_key))
+                           File.read(File.expand_path(private_key))
                          else
                            private_key
                          end,
@@ -48,8 +48,8 @@ module Cryptic
         @public_key = public_key
       else
         @public_key = OpenSSL::PKey::RSA.new(
-                        if opts[:public_key] && File.exists?(opts[:public_key].to_s)
-                          File.read(opts[:public_key])
+                        if opts[:public_key] && File.exists?(File.expand_path(opts[:public_key].to_s))
+                          File.read(File.expand_path(opts[:public_key].to_s))
                         elsif opts[:public_key]
                           opts[:public_key]
                         else
