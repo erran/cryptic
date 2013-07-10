@@ -27,7 +27,7 @@ module Cryptic
     def initialize(private_key, opts = { public_key: nil, passphrase: nil })
       if private_key.is_a? OpenSSL::PKey::RSA
         @private_key = private_key
-      elsif !private_key.to_pem.eql? ''
+      elsif !private_key.to_s.eql?('')
         @private_key = OpenSSL::PKey::RSA.new(
                          if File.exists?(private_key)
                            File.read(private_key)
