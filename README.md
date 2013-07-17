@@ -1,1 +1,1 @@
-locales/files/README.en.md
+locales/docs/README.en.md
