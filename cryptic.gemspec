@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Erran Carey']
   spec.email         = ['me@errancarey.com']
   spec.description   = 'A gem to encrypt data using public keys.'
-  spec.summary       = 'A quick way to encrypt data using public keys. Only people with the private key can decrypt said data.'
+  spec.summary       = 'A quick way to encrypt data using public keys. The only people with the private key can decrypt said data.'
   spec.homepage      = 'https://github.com/ipwnstuff/cryptic'
   spec.license       = 'MIT'
 
