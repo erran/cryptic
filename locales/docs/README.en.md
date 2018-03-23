@@ -1,3 +1,6 @@
+# No longer maintained
+:warning: **I've stopped development on this project. If you want to take this name in rubygems.org please email me at me@errancarey.com to request transfer of ownership.**
+
 # Cryptic [![Build Status](https://secure.travis-ci.org/ipwnstuff/cryptic.png)](http://travis-ci.org/ipwnstuff/cryptic) [![Dependency Status](https://gemnasium.com/ipwnstuff/cryptic.png)](https://gemnasium.com/ipwnstuff/cryptic)
 A Ruby gem for public key encryption, private key decryption, and generating key pairs.
 
